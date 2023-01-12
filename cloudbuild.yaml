@@ -1,0 +1,9 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build','-t','gcr.io/woven-victor-372817/invflow:$SHORT_SHA','.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push','gcr.io/woven-victor-372817/invflow:$SHORT_SHA']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'deploy', 'invflow', '--region=us-central1', '--platform=managed', '--image=gcr.io/woven-victor-372817/invflow:$SHORT_SHA']
+  
+  
